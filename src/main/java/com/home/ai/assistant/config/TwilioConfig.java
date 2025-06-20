@@ -19,8 +19,8 @@ public class TwilioConfig {
     private String token;
 
     private static final String JARVIS_PHONE_NUMBER = "+40723851117";
-//    private static final String GATE_PHONE_NUMBER = "+40735365445";
-    private static final String GATE_PHONE_NUMBER = "+40723851117";
+    private static final String GATE_PHONE_NUMBER = "+40735365445";
+//    private static final String GATE_PHONE_NUMBER = "+40723851117";
 
     public String initCall() {
         Twilio.init(sid, token);
