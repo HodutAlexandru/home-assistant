@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: assistant
+
+  ai:
+    anthropic:
+      api-key: ${ANTROPHIC-API-KEY}
+      model: ${CLAUDE-MODEL}
+    chat:
+      model: ${CLAUDE-MODEL}
+
+twilio:
+  sid: ${TWILIO-SID}
+  auth-token: ${TWILIO-TOKEN}

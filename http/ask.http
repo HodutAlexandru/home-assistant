@@ -1,0 +1,8 @@
+POST http://172.20.10.4:8080/jarvis
+Content-Type: application/json
+x-phone-number: +40723851117
+x-jarvis-secret: jarvisSecret
+
+{
+  "prompt": "Go shopping"
+}
