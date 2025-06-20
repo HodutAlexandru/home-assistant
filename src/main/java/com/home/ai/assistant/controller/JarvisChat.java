@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/jarvis")
-public class ParkingController {
+public class JarvisChat {
 
 
-    private static final Logger log = LoggerFactory.getLogger(ParkingController.class);
+    private static final Logger log = LoggerFactory.getLogger(JarvisChat.class);
     private final ChatClient ai;
 
-    public ParkingController(ChatClient ai) {
+    public JarvisChat(ChatClient ai) {
         this.ai = ai;
     }
 

@@ -9,9 +9,5 @@ spring:
     chat:
       model: ${CLAUDE-MODEL}
 
-twilio:
-  sid: ${TWILIO-SID}
-  auth-token: ${TWILIO-TOKEN}
-
 server:
   port: ${PORT:8080}

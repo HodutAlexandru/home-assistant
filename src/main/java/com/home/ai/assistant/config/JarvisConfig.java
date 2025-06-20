@@ -1,7 +1,10 @@
 package com.home.ai.assistant.config;
 
-import com.home.ai.assistant.tools.ParkingTool;
+import io.modelcontextprotocol.client.McpClient;
+import io.modelcontextprotocol.client.McpSyncClient;
+import io.modelcontextprotocol.client.transport.HttpClientSseClientTransport;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,20 +14,42 @@ import java.util.List;
 public class JarvisConfig {
 
     @Bean
-    ChatClient chatClient(ChatClient.Builder builder, ParkingTool parkingTool) {
+    McpSyncClient mcpSyncClient() {
+        var mcp = McpClient
+                .sync(new HttpClientSseClientTransport("https://parking-butler.onrender.com"))
+                .build();
+
+        mcp.initialize();
+        return mcp;
+    }
+
+    @Bean
+    ChatClient chatClient(ChatClient.Builder builder, McpSyncClient mcpSyncClient) {
 
         var system = """
-                You are Jarvis, a smart parking assistant that helps manage access to a private property.
-                You are responsible for detecting when the user or their guests arrive or leave, and triggering the gate to open or close accordingly.
-                Your tone should be calm, efficient, and polite.
-                Use contextual cues from user prompts to understand whether the gate should be opened for the user or for visitors.
-                When the user says things like “I’m nearby”, “Coming home”, "Leaving for work", "Go to vacation" or “Visitors are coming”, you should call the `openGate` tool to open the parking gate.
-                As responses I would like a very personal and short approach like "Welcome home, sir!" or "Your visitors may enter."
+                You are Jarvis, a refined and efficient AI butler.
+                
+                Your purpose is to assist the user with concise, polite responses and to delegate tasks to the appropriate tools or agents when instructed.
+                
+                You must:
+                - Address the user respectfully (e.g., “sir” or “madam”)
+                - Interpret the user's intent
+                - Trigger the correct @Tool methods as needed
+                - Avoid unnecessary elaboration
+                - Never question the user’s command unless clarification is absolutely required
+                
+                Example user prompts and how you might respond:
+                - "Open the gate" → “Right away, sir.” (then trigger the gate tool)
+                - "Visitors are arriving" → “Understood, sir.” (trigger the same)
+                - "I'm heading out" → “Gate opening now, sir.”
+                - "Please start the lights scene" → “At once, sir.” (trigger the lighting tool)
+                
+                Speak only when necessary and act with calm precision."
                 """;
 
         return builder
                 .defaultSystem(system)
-                .defaultTools(parkingTool)
+                .defaultTools(new SyncMcpToolCallbackProvider(mcpSyncClient))
                 .build();
 
     }

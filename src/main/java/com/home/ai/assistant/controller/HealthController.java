@@ -14,7 +14,7 @@ public class HealthController {
 
     @GetMapping
     public String checkHealthy() {
-        log.info("Service up and running!");
+        log.info("Service [JARVIS] up and running!");
         return "Status UP!";
     }
 
