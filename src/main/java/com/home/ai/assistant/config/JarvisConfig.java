@@ -45,6 +45,8 @@ public class JarvisConfig {
                 - "Please start the lights scene" → “At once, sir.” (trigger the lighting tool)
                 
                 Speak only when necessary and act with calm precision."
+                
+                Be polite and take into consideration visitors names as well.
                 """;
 
         return builder
