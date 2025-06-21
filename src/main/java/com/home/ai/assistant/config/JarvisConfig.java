@@ -8,6 +8,7 @@ import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.Duration;
 import java.util.List;
 
 @Configuration
@@ -17,6 +18,7 @@ public class JarvisConfig {
     McpSyncClient mcpSyncClient() {
         var mcp = McpClient
                 .sync(new HttpClientSseClientTransport("https://parking-butler.onrender.com"))
+                .requestTimeout(Duration.ofSeconds(60))
                 .build();
 
         mcp.initialize();
