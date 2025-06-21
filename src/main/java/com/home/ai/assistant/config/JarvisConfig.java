@@ -1,32 +1,16 @@
 package com.home.ai.assistant.config;
 
-import io.modelcontextprotocol.client.McpClient;
-import io.modelcontextprotocol.client.McpSyncClient;
-import io.modelcontextprotocol.client.transport.HttpClientSseClientTransport;
+import com.home.ai.assistant.tools.ParkingButler;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.Duration;
-import java.util.List;
 
 @Configuration
 public class JarvisConfig {
 
     @Bean
-    McpSyncClient mcpSyncClient() {
-        var mcp = McpClient
-                .sync(new HttpClientSseClientTransport("https://parking-butler.onrender.com"))
-                .requestTimeout(Duration.ofSeconds(60))
-                .build();
-
-        mcp.initialize();
-        return mcp;
-    }
-
-    @Bean
-    ChatClient chatClient(ChatClient.Builder builder, McpSyncClient mcpSyncClient) {
+    ChatClient chatClient(ChatClient.Builder builder, ParkingButler parkingButler) {
 
         var system = """
                 You are Jarvis, a refined and efficient AI butler.
@@ -53,7 +37,7 @@ public class JarvisConfig {
 
         return builder
                 .defaultSystem(system)
-                .defaultTools(new SyncMcpToolCallbackProvider(mcpSyncClient))
+                .defaultTools(parkingButler)
                 .build();
 
     }
