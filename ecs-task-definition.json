@@ -1,0 +1,22 @@
+{
+  "family": "prod-deploy",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::091947912084:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "my-app",
+      "image": "091947912084.dkr.ecr.eu-north-1.amazonaws.com/jarvis:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  ]
+}

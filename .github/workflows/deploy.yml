@@ -35,7 +35,7 @@ jobs:
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ecs-task-def.json
+          task-definition: ecs-task-definition.json
           service: jarvis-ai
           cluster: variable-bear-mam1yg
           wait-for-service-stability: true
