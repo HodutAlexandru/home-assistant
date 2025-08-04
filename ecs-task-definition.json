@@ -16,6 +16,24 @@
           "hostPort": 8080,
           "protocol": "tcp"
         }
+      ],
+      "environment": [
+        {
+          "name": "ANTROPHIC-API-KEY",
+          "value": "${{ secrets.ANTROPHIC_API_KEY }}"
+        },
+        {
+          "name": "CLAUDE-MODEL",
+          "value": "${{ secrets.CLAUDE_MODEL }}"
+        },
+        {
+          "name": "TWILIO-SID",
+          "value": "${{ secrets.TWILIO_SID }}"
+        },
+        {
+          "name": "TWILIO-TOKEN",
+          "value": "${{ secrets.TWILIO-TOKEN }}"
+        }
       ]
     }
   ]
