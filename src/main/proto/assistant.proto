@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_package = "com.home.ai.assistant.service";
+option java_outer_classname = "JarvisProto";
+option java_multiple_files = true;
+
+service AiService {
+  rpc submitRequest (Chore) returns (AiResponse);
+}
+
+message Chore {
+  string prompt = 1;
+}
+
+message AiResponse {
+  string response = 1;
+}
