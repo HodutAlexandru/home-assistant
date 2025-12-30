@@ -4,10 +4,10 @@ spring:
 
   ai:
     anthropic:
-      api-key: ${ANTROPHIC-API-KEY}
-      model: ${CLAUDE-MODEL}
-    chat:
-      model: ${CLAUDE-MODEL}
+      api-key: ${ANTHROPIC-API-KEY}
+      chat:
+        options:
+          model: ${CLAUDE-MODEL}
 
 twilio:
   sid: ${TWILIO-SID}

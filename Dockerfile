@@ -4,7 +4,7 @@ WORKDIR /build
 COPY . .
 RUN mvn clean package -DskipTests
 
-FROM openjdk:24-jdk
+FROM eclipse-temurin:24-jdk
 
 WORKDIR /app
 COPY --from=builder /build/target/assistant-0.0.1-SNAPSHOT.jar app.jar

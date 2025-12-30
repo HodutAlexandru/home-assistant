@@ -1,0 +1,19 @@
+services:
+  assistant:
+    container_name: jarvis
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-8080}:8080"
+    env_file:
+      - .env
+    environment:
+      ANTHROPIC-API-KEY: ${ANTHROPIC_API_KEY}
+      CLAUDE-MODEL: ${CLAUDE_MODEL}
+      TWILIO-SID: ${TWILIO_SID}
+      TWILIO-TOKEN: ${TWILIO_TOKEN}
+
+      PORT: ${PORT:-8080}
+    restart: unless-stopped
+
